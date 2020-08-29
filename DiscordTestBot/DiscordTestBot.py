@@ -1,28 +1,16 @@
 # インストールした discord.py を読み込む
 import discord
 
-# Webスクレイピング
+#HTTPのライブラリ
 import requests
-from bs4 import BeautifulSoup
 
-
-
-# WebサイトのURLを指定
-url = "https://api.github.com/zen"
-
-# Requestsを利用してWebページを取得する
-r = requests.get(url)
-
-# BeautifulSoupを利用してWebページを解析する
-soup = BeautifulSoup(r.text, 'html.parser')
-
-#WebサイトのHTMLを出力
-print(soup)
-
-
-
-# 自分のBotのアクセストークンに置き換えてください
+# Botのアクセストークン
 TOKEN = 'NzQ1NDk4ODg0NDI3NjEyMjMw.Xzyp8A.mg07XDO9AmhV6MjIU4Blqx7M1l4'
+
+#Zenにリクエスト
+response = requests.get('https://api.github.com/zen')
+soup = response.text
+print(soup)
 
 # 接続に必要なオブジェクトを生成
 client = discord.Client()
@@ -45,3 +33,4 @@ async def on_message(message):
 
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
+
