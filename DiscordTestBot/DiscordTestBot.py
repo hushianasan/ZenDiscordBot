@@ -4,33 +4,50 @@ import discord
 #HTTPのライブラリ
 import requests
 
+
+import aiohttp
+import asyncio
+
+
 # Botのアクセストークン
 TOKEN = 'NzQ1NDk4ODg0NDI3NjEyMjMw.Xzyp8A.mg07XDO9AmhV6MjIU4Blqx7M1l4'
 
-#Zenにリクエスト
-response = requests.get('https://api.github.com/zen')
-soup = response.text
-print(soup)
-
-# 接続に必要なオブジェクトを生成
 client = discord.Client()
 
-# 起動時に動作する処理
-@client.event
-async def on_ready():
-    # 起動したらターミナルにログイン通知が表示される
-    print('ログインしました')
+############################################
 
-# メッセージ受信時に動作する処理
-@client.event
-async def on_message(message):
-    # メッセージ送信者がBotだった場合は無視する
-    if message.author.bot:
-        return
-    # 「/neko」と発言したら「にゃーん」が返る処理
-    if message.content == '/810':
-        await message.channel.send(soup)
+def login_check():
+    @client.event
+    async def on_ready():
+        print("Discordにログインしました")
 
-# Botの起動とDiscordサーバーへの接続
+def Discord_Message():
+    async with aiohttp.ClientSession() as session:
+
+
+'''def Discord_Message():    
+    response = requests.get('https://api.github.com/zen')
+    soup = response.text
+    return soup'''
+
+def command_judge():
+    @client.event
+    async def on_message(message):
+        if message.author.bot:
+            print("Bot送信")
+            return
+        if message.content == '/810':
+            print("User送信")
+            print(Discord_Message())
+            await message.channel.send(Discord_Message())
+        
+############################################
+
+login_check()
+
+command_judge()
+
+
+
 client.run(TOKEN)
 

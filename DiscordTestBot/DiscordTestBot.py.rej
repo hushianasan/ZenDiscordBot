@@ -1,0 +1,9 @@
+diff a/DiscordTestBot/DiscordTestBot.py b/DiscordTestBot/DiscordTestBot.py	(rejected hunks)
+@@ -0,6 +0,7 @@
+ 
+ # メッセージ受信時に動作する処理
+ @client.event
++async def on_message(message):
+     # メッセージ送信者がBotだった場合は無視する
+     if message.author.bot:
+         return
