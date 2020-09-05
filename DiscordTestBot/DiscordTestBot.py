@@ -5,8 +5,12 @@ import discord
 import requests
 
 
+import aiohttp
+import asyncio
+
+
 # Botのアクセストークン
-TOKEN = 'NzQ1NDk4ODg0NDI3NjEyMjMw.Xzyp8A.mg07XDO9AmhV6MjIU4Blqx7M1l4'
+TOKEN = 'NzQ1NDk4ODg0NDI3NjEyMjMw.Xzyp8A.SSKoo61xXapSt2Ldsrie-eTgmpE'
 
 client = discord.Client()
 
@@ -18,10 +22,18 @@ def login_check():
         print("Discordにログインしました")
 
 
-def Discord_Message():    
+'''def Discord_Message():    
     response = requests.get('https://api.github.com/zen')
     soup = response.text
-    return soup
+    return soup'''
+
+async def Discord_Message():
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://api.github.com/zen') as resp:
+            #soup = await resp.text()
+            loop = asyncio.get_event_loop()
+            soup = loop.run_until_complete(Discord_Message())
+            return soup
 
 def command_judge():
     @client.event
