@@ -10,7 +10,7 @@ import asyncio
 
 
 # Botのアクセストークン
-TOKEN = 'NzQ1NDk4ODg0NDI3NjEyMjMw.Xzyp8A.mg07XDO9AmhV6MjIU4Blqx7M1l4'
+TOKEN = ''
 
 client = discord.Client()
 
